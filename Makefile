@@ -2,7 +2,7 @@ CXXFLAGS := -std=c++11
 
 select_gcc =
 
-INCLUDES += -I.
+INCLUDES += -I. -I/usr/local/Cellar/sdl2/2.0.6/include
 
 ifeq ($(CXX),g++)
 CXXFLAGS += $(shell pkg-config --cflags gl)
@@ -31,6 +31,8 @@ main.o: main.cpp
 
 main.js: main.o game.o
 	$(LD) $(LDFLAGS) -o $@ $^ $(LIBS) -s WASM=1
+
+.PHONY all: emmake make game.o; emmake make main.o; emmake make main.js
 
 clean:
 	rm -f game.o
